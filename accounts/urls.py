@@ -6,5 +6,5 @@ app_name = 'accounts'
 from . import views
 urlpatterns = [
     path('', views.loginView, name='login'),
-    path('', views.registerView, name='register')
+    path('register.html/', views.registerView, name='register')
 ]
