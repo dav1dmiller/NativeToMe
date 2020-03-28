@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 # Python functions that take a request and send back http response
 def loginView(request):
-    return render(request, 'login.html/', {'title':'Login'})
+    return render(request, 'accounts/login.html/', {'title':'Login'})
 
 @csrf_protect
 def registerView(request):
@@ -18,8 +18,8 @@ def registerView(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            print("Form saved?!?!")
+            print("Successfully created user...")
     else:
         print("Failed to create user...")
         form = UserCreationForm()
-    return render(request, 'register.html/', {"form":form})
+    return render(request, 'accounts/register.html/', {"form":form})

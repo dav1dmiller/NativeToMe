@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class LoginpageConfig(AppConfig):
-    name = 'login'
+    name = 'accounts'

@@ -54,7 +54,7 @@ ROOT_URLCONF = 'NativeToMe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/login','NativeToMe/', 'templates/'],
+        'DIRS': ['templates/accounts','NativeToMe/', 'templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,3 +119,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = 'userProfile.html/'
