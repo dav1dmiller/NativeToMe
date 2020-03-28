@@ -54,7 +54,7 @@ ROOT_URLCONF = 'NativeToMe.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/accounts','NativeToMe/', 'templates/'],
+        'DIRS': ['templates/login','NativeToMe/', 'templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
