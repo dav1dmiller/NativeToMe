@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+
+        <title>Profile</title>
+
+         <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+             <li class="nav-item active"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+             </li>
+             <li class="nav-item">
+		        <a class="nav-link" href="#">Link</a>
+             </li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Action</a>
+		          <a class="dropdown-item" href="#">Another action</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="#">Something else here</a>
+		        </div>
+            </li>
+            <li class="nav-item">
+		        <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+		    </ul>
+		  </div>
+    </nav>
+
+
+<div class="container-left">
+
+        <div class="img" src=""></div>
+        <div class="card social-prof">
+
+            <div class="card-body">
+                <h3>{% load static %}
+            <img src="{% static "images/blankProfile.jpg" %}">Jane Smith
+                    {% load static %}
+                    <img src="{% static "images/test_image.gif" %}" alt="" class="user-profile"<p>Web Developer</p></h3>
+            </div>
+        </div>
+    </div>
+
+<div class="container-left">
+
+    <div class="row">
+        <div class="card">
+    <div class="card-body">
+        <div class="ml-2">
+        <h3 class="card-title">Latest Photos</h3>
+        </div>
+    </div>
+</div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="ml-2">
+                                <div class="h5 m-0 text-blue"><strong>Top 10 Likes</strong></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Likes</div>
+                            <div class="h5">Tacos, and burrito</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Dislikes</div>
+                            <div class="h5">Heights!</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Interests</div>
+                            <div class="h5">Men!</div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--Example of social media post body-->
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="ml-2">
+                                <div class="h5 m-0 text-blue"><strong>About</strong></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">From:</div>
+                            <div class="h5">La Jolla Indian Reservation</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">School:</div>
+                            <div class="h5">CSUSM!</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Tribes</div>
+                            <div class="h5">La Jolla</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+</main>
+
+<script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>
