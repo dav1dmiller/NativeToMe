@@ -57,7 +57,7 @@
                         <p>
                             Don’t have an account Yet? <a href="/accounts/register.html/" title="">Join now</a>
                         </p>
-                        <form method="post"> {% csrf_token %}
+                        <form class="form-signin" method="post"> {% csrf_token %}
                             <div class="form-group">
                                 <input type="username" id="input" name="username" required="required"/>
                                 <label class="control-label" for="input">Email/Username</label><i class="mtrl-select"></i>
