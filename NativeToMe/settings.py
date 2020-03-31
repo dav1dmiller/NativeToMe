@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'home',
+    'tribes',
 ]
 
 MIDDLEWARE = [
@@ -108,11 +109,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     'NativeToMe/static',
 ]
-STATICFILES_FINDERS
-[
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
 
 
 # Internationalization
@@ -135,3 +131,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'userprofile.html/'
+
+CRISPY_TEMPLATE_PACK="bootstrap4"

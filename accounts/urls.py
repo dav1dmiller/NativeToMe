@@ -5,5 +5,6 @@ app_name = 'accounts'
 from . import views
 urlpatterns = [
     path('login.html/', views.loginView),
-    path('register.html/', views.registerView)
+    path('logout.html/', views.logoutView),
+    path('register.html/', views.registerView),
 ]
