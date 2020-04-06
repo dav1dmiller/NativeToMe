@@ -38,7 +38,7 @@
   					</button>
   			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-				<a class="dropdown-item" href="/accounts/userprofile.html">View Profile</a>
+				<a class="dropdown-item" href="/accounts/userprofile/userprofile.html">View Profile</a>
 				<a class="dropdown-item" href="#">Edit Profile</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="/accounts/logout.html">Logout</a>
@@ -48,10 +48,10 @@
 			{% else %}
 			<form class="form-inline my-2 my-lg-0">
 				<div class="dropdown">
-  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile
   					</button>
-  			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 				{% if user.login == false %}
 				<a class="dropdown-item" href="/accounts/login.html">View Profile</a>
 				<a class="dropdown-item" href="/accounts/login.html">Edit Profile</a>
@@ -62,9 +62,9 @@
 		</div>
 			</form>
 			{% endif %}
-
         </div>
     </nav>
+
   	<!--Typography-->
   	<div class="container">
 		{% load static %}
