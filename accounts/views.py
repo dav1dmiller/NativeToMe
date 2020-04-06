@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.checks import templates
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
@@ -13,9 +14,18 @@ def loginView(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return render(request, 'userprofile/userprofile.html', {})
+        return render(request, 'home/home.html', {})
     else:
         return render(request, 'accounts/login.html/', {'title':'Login'})
+
+@login_required
+def profileView(request):
+    username = request.POST.get('username', False)
+    password = request.POST.get('password', False)
+    user = authenticate(request, username=username, password=password)
+    if user.is_authenticated:
+        return render(request, 'accounts/userprofile.html', {})
+
 
 def logoutView(request):
         logout(request)
