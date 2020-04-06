@@ -65,7 +65,7 @@
     <h3 class="page-header"></h3>
     <div class="card">
         <div class="card-body">
-            <h3>Jane Smith's Tent</h3>
+            <h3>{{ user.username }}'s Tent</h3>
             <div class="form-group">
                 {% load static %}
                 <img src="{% static "images/blankProfile.jpg" %}">
@@ -107,14 +107,13 @@
 			        <div class="card-body">
 			            <h5 class="card-title"><strong>About</strong></h5>
                         <p>Hi I'm Jane. I like tacos. </p>
-                        {% for user in accounts_profile %}
 			            <ul class="list-group">
   			                <li class="list-group-item">From: {{ user.location }}</li>
   			                <li class="list-group-item">School: {{ user.location }}</li>
-  			                <li class="list-group-item">Tribes: {{ user. }}</li>
+  			                <li class="list-group-item">Tribes: {{ user.tribes }}</li>
   			                <li class="list-group-item">Hobbies: {{ user.hobbies }}</li>
   		                </ul>
-                        {% endfor %}
+
 			        </div>
 			    </div>
                 <div class="card" style="width: 51.5rem; margin-top: 5px;">
