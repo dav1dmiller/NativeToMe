@@ -14,6 +14,7 @@ class accounts_profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    hobbies = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         """String for representing the Model object 'user'."""
@@ -30,5 +31,8 @@ class accounts_profile(models.Model):
     def __str__(self):
         """String for representing the Model object 'birth_date'."""
         return self.birth_date
+    def __str__(self):
+        """String for representing the Model object 'birth_date'."""
+        return self.hobbies
 
 

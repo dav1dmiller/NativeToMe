@@ -26,6 +26,7 @@
 		        </div>
 		      </li>
 		    </ul>
+
             <a href="/accounts/logout.html" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</a>
 		  </div>
     </nav>
@@ -63,7 +64,7 @@
                     <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Latest photos</h3>
-                            {% load static %}
+                        {% load static %}
                         <img src="{% static "images/vacation.jpg" %}">
                     </div>
                 </div>
@@ -76,12 +77,14 @@
 			        <div class="card-body">
 			            <h5 class="card-title"><strong>About</strong></h5>
                         <p>Hi I'm Jane. I like tacos. </p>
+                        {% for user in accounts_profile %}
 			            <ul class="list-group">
-  			                <li class="list-group-item">From:</li>
-  			                <li class="list-group-item">School:</li>
-  			                <li class="list-group-item">Tribes:</li>
-  			                <li class="list-group-item">Hobbies:</li>
+  			                <li class="list-group-item">From: {{ user.location }}</li>
+  			                <li class="list-group-item">School: {{ user.location }}</li>
+  			                <li class="list-group-item">Tribes: {{ user. }}</li>
+  			                <li class="list-group-item">Hobbies: {{ user.hobbies }}</li>
   		                </ul>
+                        {% endfor %}
 			        </div>
 			    </div>
                 <div class="card" style="width: 51.5rem; margin-top: 5px;">
