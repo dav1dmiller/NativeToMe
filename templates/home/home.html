@@ -10,7 +10,7 @@
 
     <title>NativeToMe</title>
   </head>
-  <body>
+  <body style="background-color:#D1F2EB;">
 
   	<!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -47,27 +47,29 @@
 
   	<!--Typography-->
   	<div class="container">
-  		<h1 class="page-header">This is a Boostrap Template! Reference for examples <small>Secondary Text</small></h1>
+		{% load static %}
+		<img src="{% static "Banners/Banner-1.PNG" %}" height="150" width="1110">
+  		<h1 class="page-header">Welcome to NativeToMe! <small></small></h1>
 
-  		<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-  		<p><mark>tempor incididunt ut labore et dolore magna aliqua.</mark> Ut enim ad minim veniam,
-  		quis nostrud <del>exercitation ullamco laboris</del> nisi ut aliquip ex ea commodo
-  		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  		cillum <u>dolore eu fugiat nulla pariatur.</u> Excepteur sint occaecat cupidatat non
-  		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  		<p class="lead">Join a tribe of people that have the same values as you!</p>
+  		<p> NativeToMe will break the mold of other social media sites and bring people together
+		based on the same interests, characteristics, and values as one-another! Find a group that
+		makes you feel at home! Create your own tribe with values that other may have with you!
+		Create your own personal profile to describe who you are and begin searching for a
+		tribe that best represents you!</p>
 
   		<hr>
 
   		<!--Alignment & Transformation -->
-  		<p class="text-left text-lowercase">Left aligned text.</p>
-  		<p class="text-center text-uppercase">Centeraligned text.</p>
-  		<p class="text-right text-capitalize">Right aligned text.</p>
-  		<p class="text-justify">Justified text.</p>
-  		<p class="text-nowrap">No warp.</p>
-
-  		<!--Quick Floats-->
-  		<div class="float-right">Div floated to right</div>
-  		<div class="float-left">Div floated to left</div>
+  		<p class="text-left">Join a tribe!</p>
+		{% load static %}
+		<img src="{% static "Icons/Tribe.PNG" %}" height="90" width="85">
+  		<p class="text-center">Share interests in your life!</p>
+		<p class="text-center"> {% load static %}
+		<img src="{% static "Icons/Icon-4.PNG" %}" height="90" width="85"></p>
+  		<p class="text-right">Other stuff!!!</p>
+		<p class="text-right"> {% load static %}
+		<img src="{% static "Icons/Icon-5.PNG" %}" height="90" width="85"></p>
 
   		<!--Clear float-->
   		<div class="clearfix"></div>
