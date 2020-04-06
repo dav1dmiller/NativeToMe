@@ -4,4 +4,5 @@ from django.shortcuts import render
 """Python functions that take a request and render a web page"""
 
 def homeView(request):
+    print("Home Page")
     return render(request, 'home/home.html/', {'title':'Home'})

@@ -14,18 +14,16 @@ def loginView(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
+        print("User Homepage after Login")
         return render(request, 'home/home.html', {})
     else:
+        print("Failed to login")
         return render(request, 'accounts/login.html/', {'title':'Login'})
 
 @login_required
 def profileView(request):
-    username = request.POST.get('username', False)
-    password = request.POST.get('password', False)
-    user = authenticate(request, username=username, password=password)
-    if user.is_authenticated:
-        return render(request, 'accounts/userprofile.html', {})
-
+        print("User Profile")
+        return render(request, 'accounts/userprofile/userprofile.html', {'profile' : 'userprofile'})
 
 def logoutView(request):
         logout(request)
@@ -40,4 +38,4 @@ def registerView(request):
             return HttpResponseRedirect('/accounts/login.html/')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/register.html/', {"form":form})
+    return render(request, 'accounts/register.html/', {"form" : form})
