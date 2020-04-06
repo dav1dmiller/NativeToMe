@@ -8,8 +8,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 """Python functions that take a request and render a web page"""
 def loginView(request):
-    username=request.POST.get('username', False)
-    password=request.POST.get('password', False)
+    username = request.POST.get('username', False)
+    password = request.POST.get('password', False)
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
