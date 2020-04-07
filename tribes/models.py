@@ -1,15 +1,24 @@
 from django.db import models
+from django.utils import timezone
+
+
 
 """This is the blueprint for a tribe table in the database"""
 class Tribe(models.Model):
+    objects = models.Manager()
     tribeID = models.IntegerField(primary_key=True)
     tribeName = models.CharField(max_length=50)
     # How long its been a tribe
-    dateOfCreation = models.DateField()
+    dateOfCreation = models.DateField(default=timezone.now)
     # Location
     location = models.CharField(max_length=30)
+    # Privacy
+    choices = [('Public', 'Private'), ('Private', 'Public')]
+    privacyMode = models.CharField(max_length=7, choices=choices, default='Private')
     # Number of members
-    numOfMembers = models.IntegerField()
+    numOfMembers = models.IntegerField(default=1)
+    # Description
+    description = models.TextField(blank=True)
     # owner, tribe founder(s)
     tribeOwner = models.CharField(max_length=50)
 
