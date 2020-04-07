@@ -9,9 +9,12 @@ from .models import Tribe
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request):
-    return render(request, 'tribes/tribeHomePage.html/', {'title':'Tribe'})
+        return render(request, 'accounts/login.html/', {})
 
-@login_required
+
+def tribeSearch(request):
+    return render(request, 'tribes/tribeSearchPage.html/', {})
+
 def tribeCreate(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -34,4 +37,4 @@ def tribeCreate(request):
     else:
         print("Failed to create tribe")
         form = createTribeForm()
-    return render(request, 'tribes/create.html/', {'form':form})
+    return render(request, 'tribes/tribeCreatePage.html/', {'form':form})
