@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<!--Scripts go here-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!--Navbar-->
@@ -101,43 +106,44 @@
         }
         .indent-1 { float: left; }
         .indent-1 section { width:20%; float:left; }
+
+		.column {
+			display:block;
+			float: left;
+			padding: 5px;
+		}
     </style>
 </head>
 <body>
-    <div class="container">
-        <h3>Search for Tribes</h3>
-		<form action="." method="GET">
-			{% csrf_token %}
-			<!--Input for django form-->
-			<input type="text" placeholder="Search..." name="searchField" value="{{ request.GET.searchField }}" required>
-			<!--<input type="text"placeholder="Search..."name="search">-->
-			<input type="submit" value="Search">
-			<hr>
-			<h5>Tribes you may be interested in...</h5>
-			<p style="color:darkgray">This feature is not implemented yet. This area will show tribes that match the current accounts interests</p>
-
-			<h3>Results matching: </h3>
-			{% for obj in object_list %}
-				<!--Search for a tribe in tribes-->
-				<label><b>Tribe Name: </b>{{ obj.tribeName }}</label>
-				<br>
-				<label><b>Base location: </b>{{ obj.location }}</label>
-				<br>
-				<label><b>Privacy Mode: </b>{{ obj.privacyMode }}</label>
-				<br>
-				<label><b>Description: </b>{{ obj.description }}</label>
-			<hr>
-			{% endfor %}
-		</form>
-    </div>
-
-
-<!--Scripts go here-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	<form action="." method="GET">
+		<div class="col col-sm-6" style="margin:auto">
+			<div class="column"style="width:30%">
+				<h3>Search for Tribes</h3>
+				{% csrf_token %}
+				<!--Input for django form-->
+				<input type="text" placeholder="Search..." name="searchField" value="{{ request.GET.searchField }}" required>
+				<!--<input type="text"placeholder="Search..."name="search">-->
+				<input type="submit" value="Search">
+				<hr>
+				<h5>Tribes you may be interested in...</h5>
+				<p style="color:darkgray">This feature is not implemented yet. This area will show tribes that match the current accounts interests.</p>
+			</div>
+			<div class="column"style="width:70%">
+				<h3>Results matching: </h3>
+					{% for obj in object_list %}
+						<!--Search for a tribe in tribes-->
+						<label><b>Tribe Name: </b>{{ obj.tribeName }}</label>
+						<br>
+						<label><b>Base location: </b>{{ obj.location }}</label>
+						<br>
+						<label><b>Privacy Mode: </b>{{ obj.privacyMode }}</label>
+						<br>
+						<label><b>Description: </b>{{ obj.description }}</label>
+					<hr>
+				{% endfor %}
+			</div>
+    	</div>
+	</form>
 </body>
 
 </html>
