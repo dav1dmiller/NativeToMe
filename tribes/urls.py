@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     path('tribeHomePage.html/', views.tribeHomePage),
     path('tribeCreatePage.html/', views.tribeCreate),
-    path('tribeSearchPage.html/', views.tribeSearch),
+    path('tribeSearchPage.html/', views.tribeSearchPage),
 ]

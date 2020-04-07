@@ -10,7 +10,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -105,20 +104,33 @@
     </style>
 </head>
 <body>
-    <section class="indent-1"style="margin:20px;max-width:300px">
-        <h3>Find your Tribe:</h3>
-            <form class="example"style="margin:auto">
-                <input type="text"placeholder="Search..."name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        <hr>
-        <h5>Tribes you may be interested in...</h5>
-        <p style="color:darkgray">This feature is not implemented yet. This area will show tribes that match the current accounts interests</p>
-    </section>
+    <div class="container">
+        <h3>Search for Tribes</h3>
+		<form action="." method="GET">
+			{% csrf_token %}
+			<!--Input for django form-->
+			<input type="text" placeholder="Search..." name="searchField" value="{{ request.GET.searchField }}" required>
+			<!--<input type="text"placeholder="Search..."name="search">-->
+			<input type="submit" value="Search">
+			<hr>
+			<h5>Tribes you may be interested in...</h5>
+			<p style="color:darkgray">This feature is not implemented yet. This area will show tribes that match the current accounts interests</p>
 
-    <section style="margin:20px">
-        <h2>Results matching: </h2>
-    </section>
+			<h3>Results matching: </h3>
+			{% for obj in object_list %}
+				<!--Search for a tribe in tribes-->
+				<label><b>Tribe Name: </b>{{ obj.tribeName }}</label>
+				<br>
+				<label><b>Base location: </b>{{ obj.location }}</label>
+				<br>
+				<label><b>Privacy Mode: </b>{{ obj.privacyMode }}</label>
+				<br>
+				<label><b>Description: </b>{{ obj.description }}</label>
+			<hr>
+			{% endfor %}
+		</form>
+    </div>
+
 
 <!--Scripts go here-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
