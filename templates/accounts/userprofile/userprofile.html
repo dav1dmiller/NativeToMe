@@ -85,11 +85,16 @@
 			        <div class="card-body">
 			            <h5 class="card-title">Top 10 Likes for the week</h5>
 			            <p class="card-text">/*Likes go here*/</p>
+				    <p class="card-text"> Carne Asada tacos</p>
+				    <p class="card-text"> Pollo Asada tacos</p>
+				    <p class="card-text"> Carnitas tacos</p>
+				    <p class="card-text"> Al Pastor tacos</p>
 			        </div>
                     <hr>
                     <div class="card-body">
 			            <h5 class="card-title">Top 10 Dislikes for the week</h5>
 			            <p class="card-text">/*dislikes go here*/</p>
+				    <p class="card-text"> Anything that isn't tacos</p>
 			        </div>
                     <div class="card">
                     <div class="card-body">
@@ -106,12 +111,12 @@
 			    <div class="card" style="width: 51.5rem; margin-top: 5px;">
 			        <div class="card-body">
 			            <h5 class="card-title"><strong>About</strong></h5>
-                        <p>Hi I'm Jane. I like tacos. </p>
+                        <p>Hi I'm {{ user.username }}. I like tacos. </p>
 			            <ul class="list-group">
-  			                <li class="list-group-item">From: {{ user.location }}</li>
-  			                <li class="list-group-item">School: {{ user.location }}</li>
-  			                <li class="list-group-item">Tribes: {{ user.tribes }}</li>
-  			                <li class="list-group-item">Hobbies: {{ user.hobbies }}</li>
+  			                <li class="list-group-item">From: Nebraska{{ user.location }}</li>
+  			                <li class="list-group-item">School: Cal State San Marcos{{ user.location }}</li>
+  			                <li class="list-group-item">Tribes: N/A{{ user.tribes }}</li>
+  			                <li class="list-group-item">Hobbies: Eating tacos{{ user.hobbies }}</li>
   		                </ul>
 
 			        </div>
@@ -122,7 +127,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""><span style="margin-left: 5px;">Jane Smith</span>
+				{% load static %}
+                                    <img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}" alt=""><span style="margin-left: 5px;">{{ user.username }}</span>
                                 </div>
                             </div>
                             <div>
