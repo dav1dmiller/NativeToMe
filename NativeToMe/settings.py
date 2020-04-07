@@ -74,7 +74,6 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'NativeToMe.wsgi.application'
-DJANGO_SETTINGS_MODULE = 'NativeToMe.settings'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
