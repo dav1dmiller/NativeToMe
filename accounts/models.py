@@ -20,20 +20,6 @@ class UserProfile(models.Model):
     def __str__(self):
         """String for representing the Model object 'user'."""
         return self.user
-    def __str__(self):
-        """String for representing the Model object 'image'."""
-        return self.image
-    def __str__(self):
-        """String for representing the Model object 'bio'."""
-        return self.bio
-    def __str__(self):
-        """String for representing the Model object 'location'."""
-        return self.location
-    def __str__(self):
-        """String for representing the Model object 'birth_date'."""
-        return self.birth_date
-    def __str__(self):
-        """String for representing the Model object 'birth_date'."""
-        return self.hobbies
+   
 
 
