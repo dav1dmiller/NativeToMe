@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
+     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <title>NativeToMe | Create Tribe</title>
 </head>
 <body>
 <!--Navbar-->
-   <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -64,35 +63,33 @@
         </div>
     </nav>
 
-<!--Jumbotron-->
-
-		<div class="jumbotron text-center">
-			<div class="container">
-				<h1>Tribe Homepage</h1>
-
-				<a href="#" class="btn btn-primary btn-lg">Read More</a>
-			</div>
-		</div>
-
-
-<!--Text-->
 <div class="container">
-	<h1 class="page-header">NativeToMe Life </h1>
-
-	<p class="lead"> NativeToMe offers an oppotunity to find a group of
-	indivuals with the same values as you. Join a tribe and establish connections
-	with other to create friendships for life. </p>
-
-	{% load static %}
-	<img src="{% static "images/Stock-1.PNG" %}" height="150" width="1110">
-
-	<hr>
+    <h4>Please fill in this form to create a tribe.</h4>
+    <hr>
+	<form action="/tribes/create.html/" method="post">
+		{% csrf_token %}
+		<label><b>Tribe Name:</b></label>
+		<!--Input for django form-->
+		{{ form.tribeName }}
+		<br>
+		<label><b>Base location:</b></label>
+		{{ form.location}}
+		<br>
+		<label><b>Privacy Mode: </b> </label>
+		{{ form.privacyMode }}
+		<hr>
+		<label><b>Description:</b></label>
+		{{ form.description }}
+		<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    	<input type="submit" value="Create Tribe"/>
+		</form>
 </div>
 
 </body>
-    <!--Scripts go here-->
+ <!--Scripts go here-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </html>

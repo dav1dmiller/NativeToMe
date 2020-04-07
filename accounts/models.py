@@ -8,7 +8,8 @@ from django.dispatch import receiver
 
 """This is the blueprint for a profile table in the database"""
 
-class accounts_profile(models.Model):
+class UserProfile(models.Model):
+    objects = models.Manager()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='blankProfile.jpg', upload_to='profile_pics')
     bio = models.TextField(max_length=500, blank=True)
