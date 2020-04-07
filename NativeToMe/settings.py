@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
-    'home',
-    'tribes',
+    'NativeToMe.accounts',
+    'NativeToMe.home',
+    'NativeToMe.tribes',
 ]
 
 MIDDLEWARE = [
