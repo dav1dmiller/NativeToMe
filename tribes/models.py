@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.db.models import Q
 from django.contrib.auth.models import User
 
 
@@ -28,6 +29,11 @@ class Tribe(models.Model):
         else:
             return False
 
+    def tribe_search(tribeName):
+        q = Q()
+        for t in Tribe:
+            q |= Q(name_icontains=t)
+            return Tribe.objects.filter(q)
 
     def __str__(self):
         """String for representing the Model object 'tribeName'."""

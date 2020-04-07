@@ -9,3 +9,7 @@ class createTribeForm(forms.Form):
     choices = [('Public', 'Private'), ('Private', 'Public')]
     privacyMode = forms.ChoiceField(choices=choices)
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+
+    """Search for a tribe"""
+class searchTribeForm(forms.Form):
+    searchField = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)

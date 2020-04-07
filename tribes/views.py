@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import createTribeForm
+from .forms import createTribeForm, searchTribeForm
+from django.db.models import Q
+
 
 # Create your views here.
 from .models import Tribe
@@ -12,8 +14,22 @@ def tribeHomePage(request):
         return render(request, 'accounts/login.html/', {})
 
 
-def tribeSearch(request):
-    return render(request, 'tribes/tribeSearchPage.html/', {})
+def tribeSearchPage(request):
+    if request.method == "GET":
+        queryset_list = Tribe.objects.all()
+        query = request.GET.get("searchField")
+        if query:
+            match = queryset_list.filter(Q(tribeName__icontains=query))
+            print(match)
+            context = {
+                "object_list":match,
+            }
+            if match:
+                return render(request, 'tribes/tribeSearchPage.html/', context)
+            else:
+                return render(request, 'tribes/tribeSearchPage.html/', {})
+        return render(request, 'tribes/tribeSearchPage.html/', {})
+
 
 def tribeCreate(request):
     # if this is a POST request we need to process the form data
