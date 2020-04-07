@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 
 """This is the blueprint for a tribe table in the database"""
@@ -22,26 +22,14 @@ class Tribe(models.Model):
     # owner, tribe founder(s)
     tribeOwner = models.CharField(max_length=50)
 
-    def __str__(self):
-        """String for representing the Model object 'tribeID'."""
-        return self.tribeID
+    def tribe_present(tribeName):
+        if Tribe.objects.filter(tribeName=tribeName).exists():
+            return True
+        else:
+            return False
+
 
     def __str__(self):
         """String for representing the Model object 'tribeName'."""
         return self.tribeName
 
-    def __str__(self):
-        """String for representing the Model object 'dateOfCreation'."""
-        return self.dateOfCreation
-
-    def __str__(self):
-        """String for representing the Model object 'location'."""
-        return self.location
-
-    def __str__(self):
-        """String for representing the Model object 'numOfMembers'."""
-        return self.numOfMembers
-
-    def __str__(self):
-        """String for representing the Model object 'tribeOwner'."""
-        return self.tribeOwner

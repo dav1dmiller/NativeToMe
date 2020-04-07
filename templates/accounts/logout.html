@@ -22,8 +22,13 @@
 		         Tribes
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">Search Tribes</a>
-		          <a class="dropdown-item" href="#">Create Tribe</a>
+		          {% if user.is_authenticated %}
+					<a class="dropdown-item" href="/tribes/tribeSearchPage.html">Search Tribes</a>
+		            <a class="dropdown-item" href="/tribes/tribeCreatePage.html">Create Tribe</a>
+                    {% else %}
+                    <a class="dropdown-item" href="/accounts/login.html">Search Tribes</a>
+		            <a class="dropdown-item" href="/accounts/login.html">Create Tribe</a>
+                    {% endif %}
 		        </div>
 		      </li>
 		    </ul>

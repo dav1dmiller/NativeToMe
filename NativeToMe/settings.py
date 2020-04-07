@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
-    'home',
-    'tribes',
+    'accounts', 'home', 'tribes',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +72,6 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'NativeToMe.wsgi.application'
-DJANGO_SETTINGS_MODULE = 'NativeToMe.settings'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
