@@ -11,7 +11,7 @@ from .models import Tribe
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request):
-        return render(request, 'accounts/login.html/', {})
+        return render(request, 'tribes/tribeHomePage.html/', {})
 
 
 def tribeSearchPage(request):
