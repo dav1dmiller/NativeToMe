@@ -21,9 +21,9 @@ class Tribe(models.Model):
     # Description
     description = models.TextField(blank=True)
     # owner, tribe founder(s)
-    tribeOwner = models.CharField(max_length=50)
+    tribeOwner = models.CharField(max_length=50, default=User.username)
 
-    def tribe_present(tribeName): 
+    def tribe_present(tribeName):
         if Tribe.objects.filter(tribeName=tribeName).exists():
             return True
         else:

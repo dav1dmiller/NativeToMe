@@ -47,11 +47,15 @@ def tribeCreate(request):
             tribe.description = form.cleaned_data.get("description")
             tribe.choices = form.cleaned_data.get("choices")
             tribe.privacyMode = form.cleaned_data.get("privacyMode")
+            """tribe.tribeOwner = request.user does not work because of incompatible types"""
+            """tribe.tribeOwner = UserProfile.user"""
+            tribe.tribeOwner = request.user.username
             tribe.save()
 
             if Tribe.tribe_present(tribe.tribeName) == True:
                 print("Successfully created " + tribe.tribeName + "!")
                 print(tribe.tribeID)
+                print(tribe.tribeOwner)
             # redirect to a new URL:
             return HttpResponseRedirect('/', {"tribe" : tribe })
     else:
