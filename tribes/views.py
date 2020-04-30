@@ -1,10 +1,11 @@
 from random import randint
-
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import createTribeForm
 from django.db.models import Q
+from accounts.models import UserProfile
 
 # Create your views here.
 from .models import Tribe
@@ -35,6 +36,7 @@ def tribeCreate(request):
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
         form = createTribeForm(request.POST, request.FILES)
+        user = UserProfile()
         # check whether it's valid:
         if form.is_valid():
             tribe = Tribe()
@@ -51,7 +53,7 @@ def tribeCreate(request):
                 print("Successfully created " + tribe.tribeName + "!")
                 print(tribe.tribeID)
             # redirect to a new URL:
-            return HttpResponseRedirect('/tribes/tribeHomePage.html/', {"tribe" : tribe })
+            return HttpResponseRedirect('/', {"tribe" : tribe })
     else:
         print("Failed to create tribe")
         form = createTribeForm()

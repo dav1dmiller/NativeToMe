@@ -23,7 +23,7 @@ class Tribe(models.Model):
     # owner, tribe founder(s)
     tribeOwner = models.CharField(max_length=50)
 
-    def tribe_present(tribeName):
+    def tribe_present(tribeName): 
         if Tribe.objects.filter(tribeName=tribeName).exists():
             return True
         else:
