@@ -34,7 +34,7 @@ def update_profile(request):
             messages.success(request, _('Your profile was successfully updated!'))
             return HttpResponseRedirect('/userprofile/userprofile.html')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            messages.error(request, ('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)

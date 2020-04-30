@@ -15,19 +15,19 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<!--Navbar-->
+	<!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" style="justify-content-between;" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 		      <li class="nav-item active">
 		        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLeft" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		         Tribes
 		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% if user.is_authenticated %}
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownLeft">
+		          {% if user.is_authenticated %}
 					<a class="dropdown-item" href="/tribes/tribeSearchPage.html">Search Tribes</a>
 		            <a class="dropdown-item" href="/tribes/tribeCreatePage.html">Create Tribe</a>
                     {% else %}
@@ -36,44 +36,43 @@
                     {% endif %}
 		        </div>
 		      </li>
-		    </ul>
-
-			{% if user.is_authenticated %}
-			<form class="form-inline my-2 my-lg-0">
-				<div class="dropdown">
+			</ul>
+			<ul class="navbar-nav ml-auto">
+		      <li class="nav-item dropdown">
+		        {% if user.is_authenticated %}
+				<div class="dropdown dropleft" style="margin-right:75px">
   					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile
   					</button>
-  			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-				<a class="dropdown-item" href="/accounts/userprofile/userprofile.html">View Profile</a>
-				<a class="dropdown-item" href="#">Edit Profile</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="/accounts/logout.html">Logout</a>
-  			</div>
-		</div>
-			</form>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="{% url 'accounts:profileView' %}">View Profile</a>
+						<a class="dropdown-item" href="#">Edit Profile</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{% url 'accounts:logoutView' %}">Logout</a>
+					</div>
+				</div>
+			  </li>
 			{% else %}
-			<form class="form-inline my-2 my-lg-0">
-				<div class="dropdown">
-  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+				<li class="nav-item dropdown">
+				<div class="dropdown dropleft" style="margin-right:75px">
+  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile
   					</button>
-  			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				{% if user.login == false %}
-				<a class="dropdown-item" href="/accounts/login.html">View Profile</a>
-				<a class="dropdown-item" href="/accounts/login.html">Edit Profile</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="/accounts/login.html">Login</a>
-				{% endif %}
-  			</div>
-		</div>
-			</form>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="{% url 'accounts:loginView' %}">View Profile</a>
+						<a class="dropdown-item" href="#">Edit Profile</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{% url 'accounts:logoutView' %}">Login</a>
+					</div>
+				</div>
+
+			  </li>
 			{% endif %}
+		      </li>
+			</ul>
         </div>
     </nav>
 <!-- Load icon library -->
-
     <style>
         body { font-family: Arial; }
         * { box-sizing: border-box; }
@@ -115,15 +114,15 @@
     </style>
 </head>
 <body>
-	<form action="." method="GET">
-		<div class="col col-sm-6" style="margin:auto">
+	<form action="" method="GET">
+		<div class="container" style="margin:auto">
 			<div class="column"style="width:30%">
 				<h3>Search for Tribes</h3>
 				{% csrf_token %}
 				<!--Input for django form-->
-				<input type="text" placeholder="Search..." name="searchField" value="{{ request.GET.searchField }}" required>
+				<input style="width: 60%" type="text" placeholder="Search..." name="searchField" value="{{ request.GET.searchField }}" required>
 				<!--<input type="text"placeholder="Search..."name="search">-->
-				<input type="submit" value="Search">
+				<input style="width: 30%" type="submit" value="Search" id="button">
 				<hr>
 				<h5>Tribes you may be interested in...</h5>
 				<p style="color:darkgray">This feature is not implemented yet. This area will show tribes that match the current accounts interests.</p>
@@ -139,6 +138,8 @@
 						<label><b>Privacy Mode: </b>{{ obj.privacyMode }}</label>
 						<br>
 						<label><b>Description: </b>{{ obj.description }}</label>
+						<br>
+						<a href="{% url 'tribes:tribeHomePage' %}"><button type="button" class="btn btn-secondary">View Tribe Page</button></a>
 					<hr>
 				{% endfor %}
 			</div>
