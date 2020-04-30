@@ -1,17 +1,19 @@
+from random import randint
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import createTribeForm, searchTribeForm
+from .forms import createTribeForm
 from django.db.models import Q
-
 
 # Create your views here.
 from .models import Tribe
-
 """Python functions that take a request and render a web page"""
 @login_required
-def tribeHomePage(request):
-        return render(request, 'tribes/tribeHomePage.html/', {})
+def tribeHomePage(request, tribeID):
+        tribe = Tribe.objects.get(pk=tribeID)
+        context = {"tribe" : tribe }
+        return render(request, 'tribes/tribeHomePage.html/', context)
 
 
 def tribeSearchPage(request):
@@ -20,10 +22,7 @@ def tribeSearchPage(request):
         query = request.GET.get("searchField")
         if query:
             match = queryset_list.filter(Q(tribeName__icontains=query))
-            print(match)
-            context = {
-                "object_list":match,
-            }
+            context = { "object_list":match}
             if match:
                 return render(request, 'tribes/tribeSearchPage.html/', context)
             else:
@@ -40,16 +39,19 @@ def tribeCreate(request):
         if form.is_valid():
             tribe = Tribe()
             # process the data in form.cleaned_data as required
+            tribe.tribeID = randint(0,1000)
             tribe.tribeName = form.cleaned_data.get("tribeName")
             tribe.location = form.cleaned_data.get("location")
             tribe.description = form.cleaned_data.get("description")
             tribe.choices = form.cleaned_data.get("choices")
             tribe.privacyMode = form.cleaned_data.get("privacyMode")
             tribe.save()
+
             if Tribe.tribe_present(tribe.tribeName) == True:
                 print("Successfully created " + tribe.tribeName + "!")
+                print(tribe.tribeID)
             # redirect to a new URL:
-            return HttpResponseRedirect('/tribes/tribeHomePage.html/')
+            return HttpResponseRedirect('/tribes/tribeHomePage.html/', {"tribe" : tribe })
     else:
         print("Failed to create tribe")
         form = createTribeForm()

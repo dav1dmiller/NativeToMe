@@ -139,9 +139,9 @@
 						<br>
 						<label><b>Description: </b>{{ obj.description }}</label>
 						<br>
-						<a href="{% url 'tribes:tribeHomePage' %}"><button type="button" class="btn btn-secondary">View Tribe Page</button></a>
+						<a href="{% url 'tribes:tribeHomePage' obj.tribeID %}"><button type="button" id="viewTribeButton" class="btn btn-secondary">View Tribe Page</button></a>
 					<hr>
-				{% endfor %}
+					{% endfor %}
 			</div>
     	</div>
 	</form>
