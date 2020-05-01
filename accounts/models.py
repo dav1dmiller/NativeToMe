@@ -18,7 +18,6 @@ class UserProfile(models.Model):
     hobbies = models.CharField(max_length=100, blank=True)
     school = models.CharField(max_length=100, blank=True)
 
-
     def __str__(self):
         """String for representing the Model object 'user'."""
         return self.user

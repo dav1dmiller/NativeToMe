@@ -66,6 +66,8 @@ def registerView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            profile = UserProfile()
+            profile.user = request.user  # get the profile base on the user
             form.save()
             return HttpResponseRedirect('/accounts/login.html/')
     else:
