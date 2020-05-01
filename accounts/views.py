@@ -28,11 +28,16 @@ def profileView(request):
             print("User Profile GET")
             profile = UserProfile()
             profile.user = request.user  # get the profile base on the user
-            form = editProfileForm(request.POST, request.FILES)
+            form = editProfileForm(request.POST)
+            print(profile.user)
+            print(profile.hobbies)
+            print(profile.location)
+            print(profile.bio)
+            print(profile.school)
             return render(request, 'accounts/userprofile/userprofile.html', {'form' : form, 'profile':profile })
         else:
             print("User Profile POST")
-            form = editProfileForm(request.POST, request.FILES)
+            form = editProfileForm(request.POST)
             # check if form is valid
             print(form.is_valid())
             if form.is_valid():
@@ -46,10 +51,7 @@ def profileView(request):
                 profile.hobbies = form.cleaned_data.get("hobbies")
                 profile.bio = form.cleaned_data.get("bio")
                 profile.save()
-                print(profile.hobbies)
-                print(profile.location)
-                print(profile.bio)
-                print(profile.school)
+                print("Successfully saved information")
                 return render(request, 'accounts/userprofile/userprofile.html', {'profile' : profile })
             else:
                 print("Invalid form!")
