@@ -4,7 +4,7 @@ app_name = 'tribes'
 
 from . import views
 urlpatterns = [
-    path('tribeHomePage.html/', views.tribeHomePage),
-    path('tribeCreatePage.html/', views.tribeCreate),
-    path('tribeSearchPage.html/', views.tribeSearchPage),
+    path('tribeHomePage.html/<tribeID>/', views.tribeHomePage, name='tribeHomePage'),
+    path('tribeCreatePage.html/', views.tribeCreate, name='tribeCreate'),
+    path('tribeSearchPage.html/', views.tribeSearchPage, name='tribeSearchPage'),
 ]
