@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
-<div>
+
 	<!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="collapse navbar-collapse" style="justify-content-between;" id="navbarSupportedContent">
@@ -41,7 +41,13 @@
   					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="{% url 'accounts:profileView' %}">View Profile</a>
-						<a class="dropdown-item" href="#">Edit Profile</a>
+
+
+						<a class="dropdown-item" data-toggle="modal" href="#exampleModal" id="editProfile">Edit Profile</a>
+
+
+
+
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="{% url 'accounts:logoutView' %}">Logout</a>
 					</div>
@@ -107,6 +113,27 @@
 </div>
 
 <div class="container">
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					TEST
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<h1 class="page-header" style="text-align:center; padding: 0.5em">{{ tribe.tribeName }} </h1>
 	<hr>
 	<h5><strong>About: </strong><p>{{ tribe.description }}</p></h5>
@@ -168,13 +195,18 @@
             </div>
         </div>
 </div>
-
-
-
-</body>
-    <!--Scripts go here-->
+<!--Scripts go here-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script>
+		$( "#editProfile" ).click(function() {
+    		$('#exampleModal').modal('toggle');
+		});
+	</script>
+
+
+</body>
+
 </html>
