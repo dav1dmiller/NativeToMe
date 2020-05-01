@@ -39,7 +39,7 @@
   					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="{% url 'accounts:profileView' %}">View Profile</a>
-						<a class="dropdown-item" href="#">Edit Profile</a>
+						<a class="dropdown-item" data-toggle="modal" href="#exampleModal" id="editTribe">Edit Profile</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="{% url 'accounts:logoutView' %}">Logout</a>
 					</div>
@@ -55,7 +55,7 @@
 						<a class="dropdown-item" href="{% url 'accounts:loginView' %}">View Profile</a>
 						<a class="dropdown-item" href="#">Edit Profile</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{% url 'accounts:logoutView' %}">Login</a>
+						<a class="dropdown-item" href="{% url 'accounts:loginView' %}">Login</a>
 					</div>
 				</div>
 
@@ -67,6 +67,41 @@
     </nav>
 
 <div class="container" style="display: flex; flex: 1 1 100%; flex-direction: row; flex-wrap: wrap;">
+
+    <!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post">
+                        {% csrf_token %}
+                        <h6>About</h6>
+                        <hr>
+                        <label>From</label>
+                        {{ form.location }}
+                        <label>School</label>
+                        {{ form.school }}
+                        <label>Hobbies</label>
+                        {{ form.hobbies }}
+                        <label>Bio</label>
+                        {{ form.bio }}
+                        <h6>Likes</h6>
+                        <hr>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" value="Save Changes"/>
+				</div>
+                </form>
+			</div>
+		</div>
+	</div>
     {% load static %}
     <img src="{% static "Banners/Banner-2.PNG" %}" height="auto" width="100%">
     <h3 class="page-header"></h3>
@@ -89,16 +124,16 @@
         <div class="card" >
             <div class="card-body">
                 <h5 class="card-title">Top 10 Likes for the week</h5>
-                <p class="card-text"> Carne Asada tacos</p>
-                <p class="card-text"> Pollo Asada tacos</p>
-                <p class="card-text"> Carnitas tacos</p>
-                <p class="card-text"> Al Pastor tacos</p>
+                <p class="card-text"> </p>
+                <p class="card-text"> </p>
+                <p class="card-text"></p>
+                <p class="card-text"> </p>
             </div>
             <hr>
             <div class="card-body">
                 <h5 class="card-title">Top 10 Dislikes for the week</h5>
 
-                <p class="card-text"> Anything that isn't tacos</p>
+                <p class="card-text"> </p>
             </div>
             <hr>
                 <div class="card-body">
@@ -115,10 +150,10 @@
                 <h5 class="card-title"><strong>About</strong></h5>
                 <p>Hi I'm {{ user.username }}. I like tacos. </p>
                 <ul class="list-group">
-                    <li class="list-group-item">From: Nebraska{{ user.location }}</li>
-                    <li class="list-group-item">School: Cal State San Marcos{{ user.location }}</li>
-                    <li class="list-group-item">Tribes: N/A{{ user.tribes }}</li>
-                    <li class="list-group-item">Hobbies: Eating tacos{{ user.hobbies }}</li>
+                    <li class="list-group-item">From: {{ profile.location }} </li>
+                    <li class="list-group-item">School: {{ profile.school }}</li>
+                    <li class="list-group-item">Tribes: </li>
+                    <li class="list-group-item">Hobbies: {{ profile.hobbies }}</li>
                 </ul>
 
             </div>
@@ -129,7 +164,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="mr-2">
-				{% load static %}
+				        {% load static %}
                             <img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}" alt=""><span style="margin-left: 5px;">{{ user.username }}</span>
                         </div>
                     </div>
@@ -172,5 +207,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+		$( "#editProfile" ).click(function() {
+    		$('#exampleModal').modal('toggle');
+		});
+	</script>
 </body>
 </html>

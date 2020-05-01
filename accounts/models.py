@@ -16,6 +16,8 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     hobbies = models.CharField(max_length=100, blank=True)
+    school = models.CharField(max_length=100, blank=True)
+
 
     def __str__(self):
         """String for representing the Model object 'user'."""
