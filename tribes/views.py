@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import createTribeForm
+from .forms import createTribeForm, editTribeForm
 from django.db.models import Q
 
 
@@ -12,9 +12,23 @@ from .models import Tribe
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request, tribeID):
-        tribe = Tribe.objects.get(pk=tribeID)
-        context = {"tribe" : tribe }
+    tribe = Tribe.objects.get(pk=tribeID)
+    form = editTribeForm(request.POST)
+    if request.method == "GET":
+        print("tribeHomePage GET")
+        context = {'tribe' : tribe, 'form' : form}
         return render(request, 'tribes/tribeHomePage.html/', context)
+    else:
+        print("tribeHomePage POST")
+        if form.is_valid():
+            tribe.tribeName = form.cleaned_data.get("tribeName")
+            tribe.description = form.cleaned_data.get("description")
+            tribe.save()
+            context = {'tribe': tribe, 'form': form}
+            return render(request, 'tribes/tribeHomePage.html/', context)
+        else:
+            print("Invalid form!")
+            return HttpResponseRedirect('tribes/tribeHomePage.html/', {})
 
 
 def tribeSearchPage(request):

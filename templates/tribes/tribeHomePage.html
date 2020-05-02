@@ -118,27 +118,20 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
-						<div class="form-group">
+					<form method="POST">
+						{% csrf_token %}
 							<label>Tribe Name</label>
-							<input class="form-control" type="text"  placeholder="{{tribe.tribeName}}">
-						</div>
+							{{ form.tribeName }}
 
-						<div class="form-group">
 							<label>About</label>
-							<textarea class="form-control" placeholder="{{tribe.description}}"></textarea>
-						</div>
+							{{ form.description }}
 
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"> Check me out
-							</label>
-						</div>
-  					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<input type="submit" value="Save Changes"/>
+							</div>
+
+					</form>
 				</div>
 			</div>
 		</div>
