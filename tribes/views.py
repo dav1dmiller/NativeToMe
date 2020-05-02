@@ -14,21 +14,23 @@ from .models import Tribe
 def tribeHomePage(request, tribeID):
     tribe = Tribe.objects.get(pk=tribeID)
     form = editTribeForm(request.POST)
+    context = {'tribe': tribe, 'form': form}
     if request.method == "GET":
         print("tribeHomePage GET")
         context = {'tribe' : tribe, 'form' : form}
         return render(request, 'tribes/tribeHomePage.html/', context)
-    else:
+    elif request.method == "POST" and request.user.username == tribe.tribeOwner:
         print("tribeHomePage POST")
         if form.is_valid():
             tribe.tribeName = form.cleaned_data.get("tribeName")
             tribe.description = form.cleaned_data.get("description")
             tribe.save()
-            context = {'tribe': tribe, 'form': form}
             return render(request, 'tribes/tribeHomePage.html/', context)
         else:
             print("Invalid form!")
             return HttpResponseRedirect('tribes/tribeHomePage.html/', {})
+    else:
+        return render(request, 'tribes/tribeHomePage.html/', context)
 
 
 def tribeSearchPage(request):
