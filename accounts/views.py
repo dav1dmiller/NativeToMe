@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.checks import templates
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
@@ -17,35 +18,34 @@ def loginView(request):
     if user is not None:
         login(request, user)
         print("User Homepage after Login")
-        return render(request, 'home/home.html', {})
+        return profileView(request)
     else:
-        print("Failed to login")
         return render(request, 'accounts/login.html/', {'title':'Login'})
 
 @login_required
 def profileView(request):
+    """This is to create a profile object is one is no found!"""
+    if(UserProfile.objects.filter(pk=request.user).exists() == False):
+        print(request.user.username + " does not have a profile!")
+        u = User.objects.get(username=request.user.username)
+        profile = UserProfile()
+        profile.user = u
+        profile.save()
+
+    if(UserProfile.objects.filter(pk=request.user).exists()):
+        profile = UserProfile.objects.get(pk=request.user)
         if request.method == "GET":
             print("User Profile GET")
-            profile = UserProfile()
-            profile.user = request.user  # get the profile base on the user
             form = editProfileForm(request.POST)
-            print(profile.user)
-            print(profile.hobbies)
-            print(profile.location)
-            print(profile.bio)
-            print(profile.school)
-            return render(request, 'accounts/userprofile/userprofile.html', {'form' : form, 'profile':profile })
+            return render(request, 'accounts/userprofile/userprofile.html', {'form' : form, 'profile':profile})
         else:
+            """This is for editing!"""
             print("User Profile POST")
             form = editProfileForm(request.POST)
             # check if form is valid
             print(form.is_valid())
             if form.is_valid():
-                profile = UserProfile()
-                profile.user = request.user #get the profile base on the user
                 print("<!---------------------Its working---------------------!>")
-                print(profile.user)
-
                 profile.location = form.cleaned_data.get("location")
                 profile.school = form.cleaned_data.get("school")
                 profile.hobbies = form.cleaned_data.get("hobbies")
@@ -56,6 +56,9 @@ def profileView(request):
             else:
                 print("Invalid form!")
                 return HttpResponseRedirect('/accounts/userprofile/userprofile.html', {})
+    else:
+        return render(request, 'home/home.html', {})
+
 
 def logoutView(request):
         logout(request)
@@ -66,9 +69,8 @@ def registerView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            profile = UserProfile()
-            profile.user = request.user  # get the profile base on the user
             form.save()
+            """Make a UseProfile object for the new user"""
             return HttpResponseRedirect('/accounts/login.html/')
     else:
         form = UserCreationForm()

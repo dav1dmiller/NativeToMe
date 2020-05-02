@@ -10,7 +10,7 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     objects = models.Manager()
-    user = models.CharField(primary_key=True ,max_length=50)
+    user = models.OneToOneField(User, primary_key=True ,on_delete=models.CASCADE)
     image = models.ImageField(default='blankProfile.jpg', upload_to='profile_pics')
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
@@ -20,7 +20,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         """String for representing the Model object 'user'."""
-        return self.user
+        return self.user.username
 
+    def userProfilePresent(user):
+        if UserProfile.objects.filter(user=user).exists():
+            return True
+        else:
+            return False
 
 
