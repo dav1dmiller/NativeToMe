@@ -28,4 +28,3 @@ class UserProfile(models.Model):
         else:
             return False
 
-

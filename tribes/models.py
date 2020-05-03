@@ -39,3 +39,11 @@ class Tribe(models.Model):
         """String for representing the Model object 'tribeName'."""
         return self.tribeName
 
+class Posts(models.Model):
+    objects = models.Manager()
+    tribePosterID = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    image = models.ImageField(default='blankProfile.jpg', upload_to='profile_pics')
+    description = models.TextField(blank=True)
+    choices = [('Like', 'Dislike'), ('Like', 'Dislike')]
+    likeOption = models.CharField(max_length=7, choices=choices)
+    dateOfCreation = models.DateField(default=timezone.now)

@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-</head>
 
+</head>
 	<!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="collapse navbar-collapse" style="justify-content-between;" id="navbarSupportedContent">
@@ -109,7 +110,7 @@
 </div>
 
 <div class="container">
-	<!-- Modal -->
+	<!--Edit Tribe Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -139,6 +140,8 @@
 		</div>
 	</div>
 
+
+
 	<div class="card">
 		<div class="card-body">
 			<h1 class="page-header" style="text-align:center; padding: 0.5em">{{ tribe.tribeName }} </h1>
@@ -167,11 +170,44 @@
 
 	<div class="card" style="flex:4 1 60%;">
             <div class="card-body">
-                <h5 class="card-title">Recent Posts</h5>
+                <h5 class="card-title" >Recent Posts
+					<a class="btn btn-secondary" data-toggle="modal" href="#tribePostModal" id="tribePost">Create Post</a>
+				</h5>
+
+				<!--Create Tribe Post Modal -->
+				<div class="modal fade" id="tribePostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Create New Post</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+
+								<form method="POST">
+									{% csrf_token %}
+									<label>Title</label>
+									{{ form.tribeName }}
+
+									<label>Description</label>
+									{{ form.description }}
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<input type="submit" value="Save Changes"/>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
                 <div class="card">
                     <div class="card-header">
                         <div class="mr-2">
-				{% load static %}
+					{% load static %}
                             <img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}" alt=""><span style="margin-left: 5px;">{{ tribe.tribeName }}</span>
                         </div>
                     </div>
