@@ -16,10 +16,16 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     hobbies = models.CharField(max_length=100, blank=True)
+    school = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         """String for representing the Model object 'user'."""
-        return self.user
+        return self.user.username
 
+    def userProfilePresent(user):
+        if UserProfile.objects.filter(user=user).exists():
+            return True
+        else:
+            return False
 
 

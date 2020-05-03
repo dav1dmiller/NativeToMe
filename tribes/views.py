@@ -3,17 +3,33 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import createTribeForm
+from .forms import createTribeForm, editTribeForm
 from django.db.models import Q
-from accounts.models import UserProfile
+
 
 # Create your views here.
 from .models import Tribe
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request, tribeID):
-        tribe = Tribe.objects.get(pk=tribeID)
-        context = {"tribe" : tribe }
+    tribe = Tribe.objects.get(pk=tribeID)
+    form = editTribeForm(request.POST)
+    context = {'tribe': tribe, 'form': form}
+    if request.method == "GET":
+        print("tribeHomePage GET")
+        context = {'tribe' : tribe, 'form' : form}
+        return render(request, 'tribes/tribeHomePage.html/', context)
+    elif request.method == "POST" and request.user.username == tribe.tribeOwner:
+        print("tribeHomePage POST")
+        if form.is_valid():
+            tribe.tribeName = form.cleaned_data.get("tribeName")
+            tribe.description = form.cleaned_data.get("description")
+            tribe.save()
+            return render(request, 'tribes/tribeHomePage.html/', context)
+        else:
+            print("Invalid form!")
+            return HttpResponseRedirect('tribes/tribeHomePage.html/', {})
+    else:
         return render(request, 'tribes/tribeHomePage.html/', context)
 
 
@@ -36,7 +52,6 @@ def tribeCreate(request):
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
         form = createTribeForm(request.POST, request.FILES)
-        user = UserProfile()
         # check whether it's valid:
         if form.is_valid():
             tribe = Tribe()
@@ -57,7 +72,7 @@ def tribeCreate(request):
                 print(tribe.tribeID)
                 print(tribe.tribeOwner)
             # redirect to a new URL:
-            return HttpResponseRedirect('/', {"tribe" : tribe })
+            return HttpResponseRedirect('/', {'tribe' : tribe })
     else:
         print("Failed to create tribe")
         form = createTribeForm()
