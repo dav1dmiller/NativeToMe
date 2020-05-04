@@ -18,6 +18,9 @@ class UserProfile(models.Model):
     hobbies = models.CharField(max_length=100, blank=True)
     school = models.CharField(max_length=100, blank=True)
 
+    #likes = models.TextField(max_length=500, blank=True)
+    #dislikes = models.TextField(max_length=500, blank=True)
+
     def __str__(self):
         """String for representing the Model object 'user'."""
         return self.user.username
@@ -27,5 +30,4 @@ class UserProfile(models.Model):
             return True
         else:
             return False
-
 

@@ -93,6 +93,13 @@
                         {{ form.bio }}
                         <h6>Likes</h6>
                         <hr>
+			<label>Top Likes</label>
+			{{ form.likes }}
+			<h6>Dislikes</h6>
+			<hr>
+			<label>Top Dislikes</label>
+			{{ form.dislikes }}
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <input type="submit" value="Save Changes"/>
@@ -109,12 +116,18 @@
         <div class="card-body">
             <h3>{{ user.username }}'s Tent</h3>
             <div class="form-group">
+
+
+
                 {% load static %}
                 <img src="{% static "images/blankProfile.jpg" %}">
                 <br>
                 <label>Upload File</label>
                 <input type="File">
                 <p class="help-block">Only .png and .jpg allowed</p>
+
+
+
             </div>
         </div>
     </div>
@@ -123,17 +136,27 @@
     <div style="flex: 1 4 25%; margin-right: 1%">
         <div class="card" >
             <div class="card-body">
-                <h5 class="card-title">Top 10 Likes for the week</h5>
+                <h5 class="card-title">Likes</h5>
                 <p class="card-text"> </p>
-                <p class="card-text"> </p>
-                <p class="card-text"></p>
-                <p class="card-text"> </p>
+
+
+		<ul class="list-group">
+		    <li class="list-group-item">{{ profile.likes }} </li>
+		</ul>
+
+
             </div>
             <hr>
             <div class="card-body">
-                <h5 class="card-title">Top 10 Dislikes for the week</h5>
+                <h5 class="card-title">Dislikes</h5>
+		<p class="card-text"> </p>
 
-                <p class="card-text"> </p>
+
+		<ul class="list-group">
+		    <li class="list-group-item">{{ profile.dislikes }} </li>
+		</ul>
+
+
             </div>
             <hr>
                 <div class="card-body">
@@ -148,7 +171,9 @@
         <div class="card" style="margin-bottom=1%;">
             <div class="card-body" >
                 <h5 class="card-title"><strong>About</strong></h5>
-                <p>Hi I'm {{ user.username }}. I like tacos. </p>
+		<ul class="list-group">
+		    <li class="list-group-item">Bio: {{ profile.bio }} </li>
+		</ul>
                 <ul class="list-group">
                     <li class="list-group-item">From: {{ profile.location }} </li>
                     <li class="list-group-item">School: {{ profile.school }}</li>

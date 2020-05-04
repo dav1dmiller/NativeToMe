@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from .models import UserProfile
 
+
 """Python functions that take a request and render a web page"""
 def loginView(request):
     print("Login")
@@ -50,6 +51,10 @@ def profileView(request):
                 profile.school = form.cleaned_data.get("school")
                 profile.hobbies = form.cleaned_data.get("hobbies")
                 profile.bio = form.cleaned_data.get("bio")
+                #test#
+                profile.likes = form.cleaned_data.get("likes")
+                profile.dislikes = form.cleaned_data.get("dislikes")
+                ######
                 profile.save()
                 print("Successfully saved information")
                 return render(request, 'accounts/userprofile/userprofile.html', {'profile' : profile })
