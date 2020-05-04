@@ -4,8 +4,6 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User #default user model from django
 from django.db.models.signals import post_save #when profile is updated this can save for us
-from django.dispatch import receiver
-
 """This is the blueprint for a profile table in the database"""
 
 class UserProfile(models.Model):
@@ -17,6 +15,9 @@ class UserProfile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     hobbies = models.CharField(max_length=100, blank=True)
     school = models.CharField(max_length=100, blank=True)
+    #Many to many field for user to tribe
+    memberOfTribe = models.CharField(max_length=100, blank=True)
+
 
     #likes = models.TextField(max_length=500, blank=True)
     #dislikes = models.TextField(max_length=500, blank=True)
@@ -31,3 +32,7 @@ class UserProfile(models.Model):
         else:
             return False
 
+"""
+Default django user fields
+username, first_name, last_name, email, groups, user_permissions, is_staff, is_active, is_superuser, last_login, date_joined
+"""

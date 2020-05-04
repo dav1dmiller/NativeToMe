@@ -19,3 +19,9 @@ class editTribeForm(forms.Form):
     fields = ['tribeName','description']
     tribeName = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=100 )
     description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+
+class createTribePostForm(forms.Form):
+    fields = ['title', 'description']
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    #image = forms.ImageField(widget=forms.ImageField)

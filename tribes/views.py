@@ -3,23 +3,42 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import createTribeForm, editTribeForm
+from .forms import *
 from django.db.models import Q
-
+from .models import Tribe
 
 # Create your views here.
-from .models import Tribe
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request, tribeID):
     tribe = Tribe.objects.get(pk=tribeID)
-    form = editTribeForm(request.POST)
-    context = {'tribe': tribe, 'form': form}
+    current_user = User.objects.get(username = request.user.username)
+    form = createTribePostForm(request.POST)
+    #Collection of all tribeMembers
+    members = tribe.tribeMembers.all()
+    print(members)
+    #check if current_user in the given tribe's list of members
+    if current_user in members:
+        inTribe = True
+    else:
+        inTribe = False
+
+
+    print(inTribe)
+    context = {'tribe': tribe,
+               'form': form,
+               'members':members,
+               'inTribe':inTribe}
     if request.method == "GET":
         print("tribeHomePage GET")
-        context = {'tribe' : tribe, 'form' : form}
+        context = {'tribe' : tribe,
+                   'form' : form,
+                   'members':members,
+                   'inTribe':inTribe}
         return render(request, 'tribes/tribeHomePage.html/', context)
-    elif request.method == "POST" and request.user.username == tribe.tribeOwner:
+
+    elif request.method == "POST" and current_user == tribe.tribeOwner:
+        """Create Post"""
         print("tribeHomePage POST")
         if form.is_valid():
             tribe.tribeName = form.cleaned_data.get("tribeName")
@@ -48,6 +67,8 @@ def tribeSearchPage(request):
 
 
 def tribeCreate(request):
+    current_user = User.objects.get(username=request.user.username)
+    print(current_user)
     # if this is a POST request we need to process the form data
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
@@ -64,8 +85,10 @@ def tribeCreate(request):
             tribe.privacyMode = form.cleaned_data.get("privacyMode")
             """tribe.tribeOwner = request.user does not work because of incompatible types"""
             """tribe.tribeOwner = UserProfile.user"""
-            tribe.tribeOwner = request.user.username
+            tribe.tribeOwner = current_user.username
             tribe.save()
+            #When a tribe is created. The person who creates it is in the tribe. Add member.
+            tribe.tribeMembers.add(current_user)
 
             if Tribe.tribe_present(tribe.tribeName) == True:
                 print("Successfully created " + tribe.tribeName + "!")
@@ -77,3 +100,39 @@ def tribeCreate(request):
         print("Failed to create tribe")
         form = createTribeForm()
     return render(request, 'tribes/tribeCreatePage.html/', {'form':form})
+
+
+def tribeManagePage(request, tribeID):
+    print("Tribe Manage Page")
+    tribe = Tribe.objects.get(pk=tribeID)
+    form = editTribeForm(request.POST)
+    current_user = User.objects.filter(username=request.user.username)
+    #collection of tribe members
+    members = tribe.tribeMembers.all()
+    # check if current_user in the given tribe's list of members
+    for current_user in members:
+        # set bool variable to use in html render
+        if current_user == members:
+            inTribe = True
+        else:
+            inTribe = False
+
+    context = {'tribe': tribe,
+               'form': form,
+               'members': members,
+               'inTribe': inTribe}
+
+    if request.method == "GET":
+        """If the user is tribe owner"""
+        return render(request, 'tribes/tribeManagePage.html/', context)
+    # if this is a POST request we need to process the form data
+    elif request.method == "POST" and current_user == tribe.tribeOwner:
+        if form.is_valid():
+            tribe.tribeName = form.cleaned_data.get("tribeName")
+            tribe.description = form.cleaned_data.get("description")
+            tribe.save()
+            print("Successfully managed tribe")
+            return render(request, 'tribes/tribeHomePage.html/', context)
+        else:
+            print("Manage tribe failed")
+            return render(request, 'tribes/tribeManagePage.html/', {'form':form})

@@ -1,6 +1,7 @@
+from random import randint
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.checks import templates
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -12,27 +13,27 @@ from .models import UserProfile
 
 """Python functions that take a request and render a web page"""
 def loginView(request):
-    print("Login")
     username = request.POST.get('username', False)
     password = request.POST.get('password', False)
     user = authenticate(request, username=username, password=password)
     if user is not None:
+        print("Successful Login")
         login(request, user)
         print("User Homepage after Login")
         return profileView(request)
     else:
+        print("Failed to Login. Try again")
         return render(request, 'accounts/login.html/', {'title':'Login'})
 
 @login_required
 def profileView(request):
-    """This is to create a profile object is one is no found!"""
+    """This is to create a profile object if one is no found!"""
     if(UserProfile.objects.filter(pk=request.user).exists() == False):
         print(request.user.username + " does not have a profile!")
         u = User.objects.get(username=request.user.username)
         profile = UserProfile()
         profile.user = u
         profile.save()
-
     if(UserProfile.objects.filter(pk=request.user).exists()):
         profile = UserProfile.objects.get(pk=request.user)
         if request.method == "GET":
@@ -74,6 +75,7 @@ def registerView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            #User.id = randint(0, 1000)
             form.save()
             """Make a UseProfile object for the new user"""
             return HttpResponseRedirect('/accounts/login.html/')
