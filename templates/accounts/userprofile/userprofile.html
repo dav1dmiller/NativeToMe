@@ -79,7 +79,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="post">
+					<form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <h6>About</h6>
                         <hr>
@@ -91,14 +91,14 @@
                         {{ form.hobbies }}
                         <label>Bio</label>
                         {{ form.bio }}
-                        <h6>Likes</h6>
-                        <hr>
                         <label>Top Likes</label>
                         {{ form.likes }}
-                        <h6>Dislikes</h6>
-                        <hr>
                         <label>Top Dislikes</label>
                         {{ form.dislikes }}
+			<label>Upload New Profile Image</label>
+			<input type="File">
+			{{ form.image }}
+			
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -9,7 +9,6 @@ from django.db.models import Q
 from .models import Tribe, Posts, JoinRequest, House
 
 #Global list of requests for tribe owner
-requests = []
 
 # Create your views here.
 """Python functions that take a request and render a web page"""
@@ -92,12 +91,13 @@ def tribeHomePage(request, tribeID):
             posts = Posts.objects.filter(postTribeID=tribeID)
             tribe = Tribe.objects.get(pk=tribeID)
 
-
+            requests = JoinRequest.objects.filter(tribeIDToJoin = tribe)
 
             context = {'tribe': tribe,
                        'createPostForm': createPostForm,
                        'members': members,
                        'inTribe': inTribe,
+                       'requests':requests,
                        'posts': posts, }
             return render(request, 'tribes/tribeHomePage.html/', context)
         else:

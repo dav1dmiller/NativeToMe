@@ -83,6 +83,7 @@ def profileView(request):
                 #test#
                 profile.likes = form.cleaned_data.get("likes")
                 profile.dislikes = form.cleaned_data.get("dislikes")
+                #profile.image = form.cleaned_data.get("image")
                 ######
                 profile.save()
 
@@ -117,3 +118,5 @@ def registerView(request):
     else:
         form = UserCreationForm()
     return render(request, 'accounts/register.html/', {"form" : form})
+
+
