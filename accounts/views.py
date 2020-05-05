@@ -1,5 +1,4 @@
 from random import randint
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -9,6 +8,7 @@ from .forms import editProfileForm
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from .models import UserProfile
+from tribes.models import Tribe
 
 
 """Python functions that take a request and render a web page"""
@@ -27,6 +27,16 @@ def loginView(request):
 
 @login_required
 def profileView(request):
+    """Grad data"""
+    current_user = User.objects.get(username=request.user.username)
+
+    tribe = Tribe.objects.all()
+    print(tribe)
+    '''if current_user in members:
+        inTribe = True
+    else:
+        inTribe = False'''
+
     """This is to create a profile object if one is no found!"""
     if(UserProfile.objects.filter(pk=request.user).exists() == False):
         print(request.user.username + " does not have a profile!")
@@ -57,6 +67,15 @@ def profileView(request):
                 profile.dislikes = form.cleaned_data.get("dislikes")
                 ######
                 profile.save()
+
+                context = {'tribe': tribe,
+                           'createPostForm': createPostForm,
+                           'joinForm': joinForm,
+                           'members': members,
+                           'inTribe': inTribe,
+                           'post': posts, }
+
+
                 print("Successfully saved information")
                 return render(request, 'accounts/userprofile/userprofile.html', {'profile' : profile })
             else:
