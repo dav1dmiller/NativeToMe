@@ -19,10 +19,12 @@ class UserProfile(models.Model):
     dislikes = models.CharField(max_length=100, blank=True)
     #Many to many field for user to tribe
     memberOfTribe = models.CharField(max_length=100, blank=True)
+    likes = models.CharField(max_length=100, blank=True)
+    dislikes = models.CharField(max_length=100, blank=True)
+
 
     def __str__(self):
-        """String for representing the Model object 'user'."""
-        return self.user.username
+        return f'{self.user.username} Profile'
 
     def userProfilePresent(user):
         if UserProfile.objects.filter(user=user).exists():
