@@ -85,8 +85,20 @@ def tribeHomePage(request, tribeID):
             join = JoinRequest()
             join.requestingUser = current_user
             join.requestMessage = joinForm.cleaned_data.get("message")
-            join.tribeIDToJoin = tribe
             join.save()
+            join.tribeIDToJoin.add(tribe)
+
+            """Update context"""
+            posts = Posts.objects.filter(postTribeID=tribeID)
+            tribe = Tribe.objects.get(pk=tribeID)
+
+
+
+            context = {'tribe': tribe,
+                       'createPostForm': createPostForm,
+                       'members': members,
+                       'inTribe': inTribe,
+                       'posts': posts, }
             return render(request, 'tribes/tribeHomePage.html/', context)
         else:
             print("User is not part of the tribe. Cannot post")

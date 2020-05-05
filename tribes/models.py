@@ -83,8 +83,8 @@ class Posts(models.Model):
 
 class JoinRequest(models.Model):
     objects = models.Manager()
-    requestingUser = models.ForeignKey(User, on_delete=models.CASCADE)
-    tribeIDToJoin = models.OneToOneField(Tribe, primary_key=True,on_delete=models.CASCADE, default=None)
+    requestingUser = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    tribeIDToJoin = models.ManyToManyField(Tribe)
     requestMessage = models.TextField(max_length=300, default='')
 
 class Events(models.Model):
