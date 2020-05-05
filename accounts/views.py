@@ -8,7 +8,7 @@ from .forms import editProfileForm
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from .models import UserProfile
-from tribes.models import Tribe
+from tribes.models import Tribe, Posts
 
 
 """Python functions that take a request and render a web page"""
@@ -27,29 +27,32 @@ def loginView(request):
 
 @login_required
 def profileView(request):
-    """Grad data"""
-    current_user = User.objects.get(username=request.user.username)
+    """Grab data"""
+    current_user = User.objects.get(username=request.user)
+    posts = Posts.objects.filter(tribePosterID = current_user)
+    profile = UserProfile.objects.get(pk=request.user)
+    form = editProfileForm(request.POST)
+    print(posts)
+    context = {'posts': posts,
+               'form': form,
+               'profile': profile}
 
-    tribe = Tribe.objects.all()
-    print(tribe)
-    '''if current_user in members:
-        inTribe = True
-    else:
-        inTribe = False'''
 
     """This is to create a profile object if one is no found!"""
     if(UserProfile.objects.filter(pk=request.user).exists() == False):
-        print(request.user.username + " does not have a profile!")
-        u = User.objects.get(username=request.user.username)
+        print(current_user + " does not have a profile!")
         profile = UserProfile()
-        profile.user = u
+        profile.user = current_user
         profile.save()
     if(UserProfile.objects.filter(pk=request.user).exists()):
-        profile = UserProfile.objects.get(pk=request.user)
         if request.method == "GET":
             print("User Profile GET")
-            form = editProfileForm(request.POST)
-            return render(request, 'accounts/userprofile/userprofile.html', {'form' : form, 'profile':profile})
+
+            context = {'posts': posts,
+                       'form': form,
+                       'profile': profile}
+
+            return render(request, 'accounts/userprofile/userprofile.html', context)
         else:
             """This is for editing!"""
             print("User Profile POST")
@@ -68,19 +71,15 @@ def profileView(request):
                 ######
                 profile.save()
 
-                context = {'tribe': tribe,
-                           'createPostForm': createPostForm,
-                           'joinForm': joinForm,
-                           'members': members,
-                           'inTribe': inTribe,
-                           'post': posts, }
-
+                context = {'posts': posts,
+                           'form': form,
+                           'profile': profile}
 
                 print("Successfully saved information")
-                return render(request, 'accounts/userprofile/userprofile.html', {'profile' : profile })
+                return render(request, 'accounts/userprofile/userprofile.html', context)
             else:
                 print("Invalid form!")
-                return HttpResponseRedirect('/accounts/userprofile/userprofile.html', {})
+                return render(request, 'accounts/userprofile/userprofile.html', context)
     else:
         return render(request, 'home/home.html', {})
 

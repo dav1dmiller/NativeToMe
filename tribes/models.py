@@ -30,8 +30,6 @@ class Tribe(models.Model):
     # list of tribe members
     tribeMembers = models.ManyToManyField(User, related_name="tribeMembers")
 
-
-
     def tribe_present(tribeName):
         if Tribe.objects.filter(tribeName=tribeName).exists():
             return True
@@ -47,6 +45,25 @@ class Tribe(models.Model):
     def __str__(self):
         """String for representing the Model object 'tribeName'."""
         return self.tribeName
+
+
+
+class House(models.Model):
+    objects = models.Manager()
+    houseName = models.CharField(default='', max_length=200)
+    houseID = models.IntegerField(primary_key=True, default=0)
+    tribeIDHouse = models.ManyToManyField(Tribe)
+    # How long its been a tribe
+    dateOfCreation = models.DateField(default=timezone.now)
+    # Description
+    description = models.TextField(blank=True)
+    # owner, tribe founder(s)
+    houseCreator = models.OneToOneField(User, on_delete=models.CASCADE, default=User.is_active)
+
+    def __str__(self):
+        """String for representing the Model object 'houseName'."""
+        return self.houseName
+
 
 class Posts(models.Model):
     """NEEDS IMPROVEMENT"""
@@ -68,3 +85,12 @@ class JoinRequest(models.Model):
     requestingUser = models.ForeignKey(User, on_delete=models.CASCADE)
     tribeIDToJoin = models.OneToOneField(Tribe, primary_key=True,on_delete=models.CASCADE, default=None)
     requestMessage = models.TextField(max_length=300, default='')
+
+class Events(models.Model):
+    objects = models.Manager()
+    postingUser = models.ForeignKey(User, on_delete=models.CASCADE)
+    tribeEvent = models.OneToOneField(Tribe, primary_key=True,on_delete=models.CASCADE, default=None)
+    requestMessage = models.TextField(max_length=300, default='')
+    image = models.ImageField(default='blankProfile.jpg', upload_to='profile_pics')
+    description = models.TextField(blank=True)
+    dateOfCreation = models.DateField(default=timezone.now)

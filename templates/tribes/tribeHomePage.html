@@ -148,6 +148,32 @@
 				{{ member.username }}
 			{% endfor %}</h5>
 		</div>
+		<hr>
+		<!-- Tribe Houses -->
+		<div class="card-group" style="padding: 0.5em;">
+		  <div class="card">
+			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
+			<div class="card-body">
+			  <h5 class="card-title">House of Swag</h5>
+			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse1">Join House</a>
+			</div>
+		  </div>
+		  <div class="card">
+			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
+			<div class="card-body">
+			  <h5 class="card-title">House of Tacos</h5>
+			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse2">Join House</a>
+			</div>
+		  </div>
+		  <div class="card">
+			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
+			<div class="card-body">
+			  <h5 class="card-title">House of Wheeling</h5>
+			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse3">Join House</a>
+			</div>
+		  </div>
+		<!-- End Tribe Houses -->
+		</div>
 	</div>
 </div>
 <!--Text-->

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import *
 from django.db.models import Q
-from .models import Tribe, Posts, JoinRequest
+from .models import Tribe, Posts, JoinRequest, House
 
 #Global list of requests for tribe owner
 requests = []
@@ -143,7 +143,19 @@ def tribeCreate(request):
     return render(request, 'tribes/tribeCreatePage.html/', {'form':form})
 
 
-def tribeManagePage(request, tribeID):
+def tribeHousePage(request, tribeID):
+    print("Tribe House Page")
+    tribe = Tribe.objects.get(pk=tribeID)
+    #tribeIDHouse = House.objects.get()
+    houses = House.objects.filter(tribeID = tribeIDHouse)
+    print(houses)
+    context = {'tribe': tribe,
+               'houses': houses,
+               }
+
+    return render(request, 'tribes/tribeHousePage.html/', context)
+
+def tribeManagePage(request, tribeID, tribeIDHouse):
     print("Tribe Manage Page")
     tribe = Tribe.objects.get(pk=tribeID)
     form = editTribeForm(request.POST)

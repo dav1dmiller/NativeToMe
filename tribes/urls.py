@@ -7,6 +7,6 @@ urlpatterns = [
     path('tribeHomePage.html/<tribeID>/', views.tribeHomePage, name='tribeHomePage'),
     path('tribeCreatePage.html/', views.tribeCreate, name='tribeCreate'),
     path('tribeSearchPage.html/', views.tribeSearchPage, name='tribeSearchPage'),
-    path('tribeManagePage.html/<tribeID>', views.tribeManagePage, name='tribeManagePage'),
-    path('tribeHousePage.html/<tribeID>', views.tribeManagePage, name='tribeHousePage'),
+    path('tribeManagePage.html/<tribeID>/', views.tribeManagePage, name='tribeManagePage'),
+    path('tribeHousePage.html/<tribeID>/', views.tribeHousePage, name='tribeHousePage')
 ]
