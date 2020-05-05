@@ -27,26 +27,29 @@ def loginView(request):
 
 @login_required
 def profileView(request):
-    """Grab data"""
+    """Grad data"""
     current_user = User.objects.get(username=request.user)
-    posts = Posts.objects.filter(tribePosterID = current_user)
-    profile = UserProfile.objects.get(pk=request.user)
-    form = editProfileForm(request.POST)
-    print(posts)
-    context = {'posts': posts,
-               'form': form,
-               'profile': profile}
+    if Posts.objects.filter(tribePosterID = current_user).exists():
+        posts = Posts.objects.get(tribePosterID = current_user)
+    else:
+        posts = Posts()
+    tribe = Tribe.objects.all()
+    print(tribe)
+
+    context = {}
 
 
     """This is to create a profile object if one is no found!"""
     if(UserProfile.objects.filter(pk=request.user).exists() == False):
-        print(current_user + " does not have a profile!")
+        print(current_user.username + " does not have a profile!")
         profile = UserProfile()
         profile.user = current_user
         profile.save()
     if(UserProfile.objects.filter(pk=request.user).exists()):
+        profile = UserProfile.objects.get(pk=request.user)
         if request.method == "GET":
             print("User Profile GET")
+            form = editProfileForm(request.POST)
 
             context = {'posts': posts,
                        'form': form,
@@ -79,7 +82,7 @@ def profileView(request):
                 return render(request, 'accounts/userprofile/userprofile.html', context)
             else:
                 print("Invalid form!")
-                return render(request, 'accounts/userprofile/userprofile.html', context)
+                return render(request, 'accounts/userprofile/userprofile.html', {})
     else:
         return render(request, 'home/home.html', {})
 

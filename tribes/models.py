@@ -69,16 +69,17 @@ class Posts(models.Model):
     """NEEDS IMPROVEMENT"""
     objects = models.Manager()
     title = models.CharField(default='', max_length=200)
+    postID = models.IntegerField(primary_key=True, default=randint(0,1000))
     #User who posted
-    tribePosterID = models.ForeignKey(User, on_delete=models.CASCADE,default=User.is_active)
+    tribePosterID = models.ManyToManyField(User, related_name="tribePosterID")
     #What tribe does this post belong to
-    postTribeID = models.ForeignKey(Tribe, primary_key=True,on_delete=models.CASCADE, default=0)
+    postTribeID = models.ManyToManyField(Tribe, related_name="postTribeID")
     image = models.ImageField(default='blankProfile.jpg', upload_to='profile_pics')
     description = models.TextField(blank=True)
     dateOfCreation = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return self.tribePosterID.username
+        return self.title
 
 class JoinRequest(models.Model):
     objects = models.Manager()
