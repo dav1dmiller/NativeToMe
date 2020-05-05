@@ -221,7 +221,7 @@
 					{% load static %}
 
 							<img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}">
-							<span style="margin-left: 5px;">{{ p.userWhoPosted }} of {{ p.postTribeID }}</span>
+							<span style="margin-left: 5px;">{% for name in p.tribePosterID.all %}{{ name }}{% endfor %} of {% for name in p.postTribeID.all %}{{ name }}{% endfor %}</span>
                         </div>
 
 						<h5 class="card-title" style="padding: 0.2em"> {{ p.title }} </h5>

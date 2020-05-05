@@ -51,7 +51,7 @@ class Tribe(models.Model):
 class House(models.Model):
     objects = models.Manager()
     houseName = models.CharField(default='', max_length=200)
-    houseID = models.IntegerField(primary_key=True, default=0)
+    houseID = models.IntegerField(primary_key=True, default=randint(0,1000))
     houseInTribe = models.ManyToManyField(Tribe)
     # How long its been a tribe
     dateOfCreation = models.DateField(default=timezone.now)
