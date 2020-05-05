@@ -19,12 +19,13 @@ def tribeHomePage(request, tribeID):
     #Tribe object
     tribe = Tribe.objects.get(pk=tribeID)
     #Posts object
-    posts = Posts.objects.filter(pk=tribeID)
+    posts = Posts.objects.filter(postTribeID=tribeID)
     createPostForm = createTribePostForm(request.POST)
     joinForm = requestToJoin(request.POST)
     #Collection of all tribeMembers
     members = tribe.tribeMembers.all()
     print(members)
+    print(posts)
     #check if current_user in the given tribe's list of members
     if current_user in members:
         inTribe = True

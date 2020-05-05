@@ -35,7 +35,7 @@ def profileView(request):
         posts = Posts.objects.filter(tribePosterID = current_user)
     else:
         posts = Posts()
-    
+
     context = {'posts': posts,
                'form': form,
                'profile': profile}
