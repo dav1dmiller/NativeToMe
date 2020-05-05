@@ -84,8 +84,11 @@ class Posts(models.Model):
 class JoinRequest(models.Model):
     objects = models.Manager()
     requestingUser = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-    tribeIDToJoin = models.ManyToManyField(Tribe)
+    tribeIDToJoin = models.ManyToManyField(Tribe, related_name="tribeIDToJoin")
     requestMessage = models.TextField(max_length=300, default='')
+
+    def __str__(self):
+        return self.requestingUser.username
 
 class Events(models.Model):
     objects = models.Manager()

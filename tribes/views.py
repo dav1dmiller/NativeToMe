@@ -92,7 +92,7 @@ def tribeHomePage(request, tribeID):
             tribe = Tribe.objects.get(pk=tribeID)
 
             requests = JoinRequest.objects.filter(tribeIDToJoin = tribe)
-
+            print(requests)
             context = {'tribe': tribe,
                        'createPostForm': createPostForm,
                        'members': members,
@@ -178,7 +178,8 @@ def tribeManagePage(request, tribeID):
     tribe = Tribe.objects.get(pk=tribeID)
     form = editTribeForm(request.POST)
 
-    requests = JoinRequest.objects.filter(pk=tribeID)
+    requests = JoinRequest.objects.filter(tribeIDToJoin=tribe)
+    print(requests)
 
     current_user = User.objects.filter(username=request.user.username)
     #collection of tribe members

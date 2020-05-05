@@ -79,20 +79,21 @@
 		{{ form.tribeName }}
 		<label>About</label>
 		{{ form.description }}
-		<label style="padding: 0.5em;">Pending Join Requests</label>
-			<br>
-			{% for x in requests %}
-				<label><b>From:</b></label>
-				{{ x.requestingUser }}
-				<label><b>Message:</b></label>
-				{{ x.requestMessage }}
-				<br>
-				<button type="button" class="btn btn-primary" style="padding: 0.5em;">Approve</button>
-				<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Disapprove</button>
-				<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Ignore</button>
-				<br>
-			{% endfor %}
+		<h5 style="padding: 0.5em;">Pending Join Requests</h5>
+			{% for p in requests %}
+					<label><b>From:</b></label>
+					{{ p.requestingUser }}
 
+					<label><b>Message:</b></label>
+
+					{{ p.requestMessage }}
+					<br>
+					<button type="button" class="btn btn-primary" style="padding: 0.5em;">Approve</button>
+					<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Disapprove</button>
+					<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Ignore</button>
+					<br>
+
+			{% endfor %}
 		<div class="modal-footer">
 			<input type="submit" class="btn btn-secondary" value="Save Changes"/>
 		</div>
