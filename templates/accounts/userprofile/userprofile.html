@@ -96,7 +96,9 @@
                         <label>Top Dislikes</label>
                         {{ form.dislikes }}
 						<label>Upload New Profile Image</label>
+						<input type="File">
 						{{ form.image }}
+			
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -117,6 +119,10 @@
 
        		<img class="rounded-circle account-img" src="{{ user.userprofile.image.url }}" width="150" height="150">
                 <br>
+                <label>Upload File</label>
+                <input type="File">
+                <p class="help-block">Only .png and .jpg allowed</p>
+
             </div>
         </div>
     </div>

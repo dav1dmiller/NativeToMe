@@ -71,8 +71,9 @@ def profileView(request):
         else:
             """This is for editing!"""
             print("User Profile POST")
-            form = editProfileForm(request.POST, request.FILES)
+            form = editProfileForm(request.POST)
             # check if form is valid
+            print(form.is_valid())
             if form.is_valid():
                 print("<!---------------------Its working---------------------!>")
                 profile.location = form.cleaned_data.get("location")
