@@ -83,7 +83,7 @@ def profileView(request):
                 #test#
                 profile.likes = form.cleaned_data.get("likes")
                 profile.dislikes = form.cleaned_data.get("dislikes")
-                #profile.image = form.cleaned_data.get("image")
+                profile.image = form.cleaned_data.get("image")
                 ######
                 profile.save()
 

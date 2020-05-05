@@ -19,8 +19,7 @@ class UserProfile(models.Model):
     dislikes = models.CharField(max_length=100, blank=True)
     #Many to many field for user to tribe
     memberOfTribe = models.CharField(max_length=100, blank=True)
-    likes = models.CharField(max_length=100, blank=True)
-    dislikes = models.CharField(max_length=100, blank=True)
+
 
 
     def __str__(self):
