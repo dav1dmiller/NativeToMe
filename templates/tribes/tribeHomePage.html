@@ -149,27 +149,34 @@
 			{% endfor %}</h5>
 		</div>
 		<hr>
+
 		<!-- Tribe Houses -->
 		<div class="card-group" style="padding: 0.5em;">
 		  <div class="card">
 			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
 			<div class="card-body">
 			  <h5 class="card-title">House of Swag</h5>
+				{% if inTribe == True %}
 			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse1">Join House</a>
+				{% endif %}
 			</div>
 		  </div>
 		  <div class="card">
 			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
 			<div class="card-body">
 			  <h5 class="card-title">House of Tacos</h5>
+			  {% if inTribe == True %}
 			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse2">Join House</a>
+				{% endif %}
 			</div>
 		  </div>
 		  <div class="card">
 			<img class="card-img-top" src=".../100px180/" alt="Card image cap">
 			<div class="card-body">
 			  <h5 class="card-title">House of Wheeling</h5>
+			  {% if inTribe == True %}
 			  <a class="btn btn-secondary" href="{% url 'tribes:tribeHousePage' tribe.tribeID %}" id="joinHouse3">Join House</a>
+				{% endif %}
 			</div>
 		  </div>
 		<!-- End Tribe Houses -->

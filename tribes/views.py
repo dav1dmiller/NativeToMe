@@ -146,16 +146,20 @@ def tribeCreate(request):
 def tribeHousePage(request, tribeID):
     print("Tribe House Page")
     tribe = Tribe.objects.get(pk=tribeID)
-    #tribeIDHouse = House.objects.get()
-    houses = House.objects.filter(tribeID = tribeIDHouse)
-    print(houses)
+    houses = House.objects.all()
+    testHouse = House.objects.get(houseID = 1)
+    print(testHouse.houseInTribe)
+    print(testHouse.dateOfCreation)
+    house = House.objects.filter(houseInTribe = tribeID)
+
+    print(house)
     context = {'tribe': tribe,
                'houses': houses,
                }
 
     return render(request, 'tribes/tribeHousePage.html/', context)
 
-def tribeManagePage(request, tribeID, tribeIDHouse):
+def tribeManagePage(request, tribeID):
     print("Tribe Manage Page")
     tribe = Tribe.objects.get(pk=tribeID)
     form = editTribeForm(request.POST)
