@@ -15,6 +15,7 @@ requests = []
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request, tribeID):
+    """Grab Data"""
     current_user = User.objects.get(username=request.user)
     #Tribe object
     tribe = Tribe.objects.get(pk=tribeID)
@@ -38,7 +39,6 @@ def tribeHomePage(request, tribeID):
                'inTribe': inTribe,
                'post': posts, }
 
-
     if request.method == "GET":
         print("tribeHomePage GET")
         joinForm = requestToJoin(request.POST)
@@ -53,27 +53,28 @@ def tribeHomePage(request, tribeID):
         """Create Post"""
         print("tribeHomePage POST")
         if createPostForm.is_valid():
-            #New post
             print("New post")
             post = Posts()
             post.title = createPostForm.cleaned_data.get("title")
             post.description = createPostForm.cleaned_data.get("description")
             post.dateOfCreation = datetime.now()
-            post.tribePosterID.add(current_user)
-            post.postTribeID = tribe
+            print(tribe)
+            print(current_user)
             print(post.title)
             post.save()
-
-            posts = Posts.objects.filter(pk=tribeID)
+            post.postTribeID.add(tribe)
+            post.tribePosterID.add(current_user)
 
             """Update context"""
+            posts = Posts.objects.filter(postTribeID=tribeID)
+            tribe = Tribe.objects.get(pk=tribeID)
+
             context = {'tribe': tribe,
                        'createPostForm': createPostForm,
-                       'joinForm': joinForm,
                        'members': members,
                        'inTribe': inTribe,
-                       'post': posts, }
-
+                       'posts': posts, }
+            print(posts)
             return render(request, 'tribes/tribeHomePage.html/', context)
         else:
             print("Invalid form!")
@@ -84,8 +85,20 @@ def tribeHomePage(request, tribeID):
             join = JoinRequest()
             join.requestingUser = current_user
             join.requestMessage = joinForm.cleaned_data.get("message")
-            join.tribeIDToJoin = tribe
             join.save()
+            join.tribeIDToJoin.add(tribe)
+
+            """Update context"""
+            posts = Posts.objects.filter(postTribeID=tribeID)
+            tribe = Tribe.objects.get(pk=tribeID)
+
+
+
+            context = {'tribe': tribe,
+                       'createPostForm': createPostForm,
+                       'members': members,
+                       'inTribe': inTribe,
+                       'posts': posts, }
             return render(request, 'tribes/tribeHomePage.html/', context)
         else:
             print("User is not part of the tribe. Cannot post")

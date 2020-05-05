@@ -3,7 +3,7 @@ from django import forms
 class editProfileForm(forms.Form):
 
 
-    fields = ['school', 'hobbies', 'location', 'bio', 'likes', 'dislikes']
+    fields = ['school', 'hobbies', 'location', 'bio', 'likes', 'dislikes', 'image']
     school = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=100 )
     hobbies = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
     location = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=50)
@@ -11,6 +11,8 @@ class editProfileForm(forms.Form):
     #test#
     likes = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=100)
     dislikes = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), max_length=100)
+    #test#
+    
 
 
 
