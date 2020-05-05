@@ -75,7 +75,6 @@ def registerView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            #User.id = randint(0, 1000)
             form.save()
             """Make a UseProfile object for the new user"""
             return HttpResponseRedirect('/accounts/login.html/')
