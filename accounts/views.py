@@ -30,31 +30,38 @@ def profileView(request):
     """Grab data"""
     current_user = User.objects.get(username=request.user)
     form = editProfileForm(request.POST)
-    profile = UserProfile.objects.get(pk=current_user)
-    if Posts.objects.filter(tribePosterID = current_user).exists():
-        posts = Posts.objects.filter(tribePosterID = current_user)
-    else:
-        posts = Posts()
-
-    context = {'posts': posts,
-               'form': form,
-               'profile': profile}
+    """Check for profile object"""
+    if UserProfile.objects.filter(pk=current_user).exists() == True and Posts.objects.filter(tribePosterID = current_user).exists() == True:
+        print("TRUE")
+        profile = UserProfile.objects.get(pk=current_user)
+        posts = Posts.objects.filter(tribePosterID=current_user)
+        context = {'posts': posts,
+                   'form': form,
+                   'profile': profile}
+        print(profile)
 
     """This is to create a profile object if one is no found!"""
     if(UserProfile.objects.filter(pk=request.user).exists() == False):
         print(current_user.username + " does not have a profile!")
         profile = UserProfile()
         profile.user = current_user
+        posts = Posts.objects.filter(tribePosterID=current_user)
+        print(posts)
         profile.save()
-    if(UserProfile.objects.filter(pk=request.user).exists()):
+
+        context = {'posts': posts,
+                   'form': form,
+                   'profile': profile}
+
+        return render(request, 'accounts/userprofile/userprofile.html', context)
+    elif(UserProfile.objects.filter(pk=request.user).exists() == True):
         print(current_user.username + " already has an account.")
         profile = UserProfile.objects.get(pk=request.user)
+        posts = Posts.objects.filter(tribePosterID=current_user)
         if request.method == "GET":
             print("User Profile GET")
             form = editProfileForm(request.POST)
-            print(posts)
-            print(form)
-            print(profile)
+
 
             context = {'posts': posts,
                        'form': form,
@@ -87,6 +94,9 @@ def profileView(request):
                 return render(request, 'accounts/userprofile/userprofile.html', context)
             else:
                 print("Invalid form!")
+                context = {'posts': posts,
+                           'form': form,
+                           'profile': profile}
                 return render(request, 'accounts/userprofile/userprofile.html', context)
     else:
         return render(request, 'home/home.html', {})
