@@ -15,7 +15,7 @@ requests = []
 """Python functions that take a request and render a web page"""
 @login_required
 def tribeHomePage(request, tribeID):
-    current_user = User.objects.get(username=request.user.username)
+    current_user = User.objects.get(username=request.user)
     #Tribe object
     tribe = Tribe.objects.get(pk=tribeID)
     #Posts object
@@ -58,7 +58,7 @@ def tribeHomePage(request, tribeID):
             post.title = createPostForm.cleaned_data.get("title")
             post.description = createPostForm.cleaned_data.get("description")
             post.dateOfCreation = datetime.now()
-            post.tribePosterID = current_user
+            post.tribePosterID.add(current_user)
             post.postTribeID = tribe
             print(post.title)
             post.save()
