@@ -200,7 +200,7 @@
 		</div>
 	</div>
 
-	<div class="card" style="flex:4 1 60%;">
+	<div class="card" style="flex:4 1 60%;overflow-y: scroll; height:60vh;">
             <div class="card-body">
                 <h5 class="card-title" >Recent Posts in {{ tribe.tribeName }}
 					{% if inTribe == True %}
@@ -243,7 +243,7 @@
 					{% load static %}
 
 							<img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}">
-							<span style="margin-left: 5px;">{{ p.tribePosterID }} of {{ p.postTribeID }}</span>
+							<span style="margin-left: 5px;">{% for name in p.tribePosterID.all %}{{ name }}{% endfor %} of {% for name in p.postTribeID.all %}{{ name }}{% endfor %}</span>
                         </div>
 
 						<h5 class="card-title" style="padding: 0.2em"> {{ p.title }} </h5>
