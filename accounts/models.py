@@ -15,12 +15,10 @@ class UserProfile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     hobbies = models.CharField(max_length=100, blank=True)
     school = models.CharField(max_length=100, blank=True)
+    likes = models.CharField(max_length=100, blank=True)
+    dislikes = models.CharField(max_length=100, blank=True)
     #Many to many field for user to tribe
     memberOfTribe = models.CharField(max_length=100, blank=True)
-
-
-    #likes = models.TextField(max_length=500, blank=True)
-    #dislikes = models.TextField(max_length=500, blank=True)
 
     def __str__(self):
         """String for representing the Model object 'user'."""

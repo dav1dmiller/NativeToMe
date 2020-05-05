@@ -73,16 +73,28 @@
 <div class="container">
 	<!--Edit Tribe -->
 	<form method="POST">
-		<h5>Manage Your Tribe</h5>
+		<h5>Manage Your Tribe - {{ tribe.tribeName }}</h5>
 		{% csrf_token %}
 		<label>Tribe Name</label>
 		{{ form.tribeName }}
 		<label>About</label>
 		{{ form.description }}
 		<label style="padding: 0.5em;">Pending Join Requests</label>
+			<br>
+			{% for x in requests %}
+				<label><b>From:</b></label>
+				{{ x.requestingUser }}
+				<label><b>Message:</b></label>
+				{{ x.requestMessage }}
+				<br>
+				<button type="button" class="btn btn-primary" style="padding: 0.5em;">Approve</button>
+				<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Disapprove</button>
+				<button type="button" class="btn btn-secondary" style="padding: 0.5em;">Ignore</button>
+				<br>
+			{% endfor %}
+
 		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<input type="submit" value="Save Changes"/>
+			<input type="submit" class="btn btn-secondary" value="Save Changes"/>
 		</div>
 	</form>
 </div>
