@@ -116,17 +116,12 @@
         <div class="card-body">
             <h3>{{ user.username }}'s Tent</h3>
             <div class="form-group">
-
-
-
-                {% load static %}
-                <img src="{% static "images/blankProfile.jpg" %}">
+		
+       		<img class="rounded-circle account-img" src="{{ user.userprofile.image.url }}" width="150" height="150">
                 <br>
                 <label>Upload File</label>
                 <input type="File">
                 <p class="help-block">Only .png and .jpg allowed</p>
-
-
 
             </div>
         </div>
@@ -189,8 +184,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="mr-2">
-				        {% load static %}
-                            <img class="rounded-circle" width="45" src="{% static "images/blankProfile.jpg" %}" alt=""><span style="margin-left: 5px;">{{ user.username }}</span>
+                            <img class="rounded-circle" width="45" height="45" src="{{ user.userprofile.image.url }}" alt=""><span style="margin-left: 5px;">{{ user.username }}</span>
                         </div>
                     </div>
                     <div>
